@@ -657,6 +657,69 @@
             font-size: 11px;
         }
     }
+
+        .curriculum-section {
+        padding: 80px 0;
+        background-color: white;
+    }
+    
+    .curriculum-card {
+        border-radius: 10px;
+        overflow: hidden;
+        height: 100%;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        transition: all 0.3s;
+    }
+    
+    .curriculum-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+    
+    .curriculum-card.nursery {
+        border-left: 5px solid var(--primary-color);
+    }
+    
+    .curriculum-card.primary {
+        border-left: 5px solid var(--secondary-color);
+    }
+    
+    .curriculum-image {
+        object-fit: cover;
+        min-height: 250px;
+    }
+    
+    .curriculum-content {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .curriculum-title {
+        font-size: 22px;
+        margin-bottom: 15px;
+        color: var(--dark-color);
+    }
+    
+    .curriculum-card ul {
+        padding-left: 20px;
+        margin-bottom: 15px;
+    }
+    
+    .curriculum-card li {
+        margin-bottom: 8px;
+    }
+    
+    @media (max-width: 768px) {
+        .curriculum-card {
+            flex-direction: column;
+        }
+        
+        .curriculum-image {
+            width: 100%;
+            height: 200px;
+        }
+    }
     
     @media (max-width: 768px) {
         .logo-text {
@@ -915,46 +978,68 @@
     </section>
     
     <!-- Curriculum Section -->
-    <section class="curriculum-section">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Standard Curriculum</h2>
-                <p class="text-muted">Tailored programs for different age groups</p>
-            </div>
-            
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="curriculum-card nursery">
-                        <h3 class="curriculum-title">Nursery Program</h3>
-                        <p>Our nursery program focuses on foundational learning through play and discovery. We emphasize:</p>
-                        <ul>
-                            <li>Early literacy and numeracy skills</li>
-                            <li>Social and emotional development</li>
-                            <li>Creative expression through art and music</li>
-                            <li>Basic Christian values and character building</li>
-                            <li>Physical coordination and motor skills</li>
-                        </ul>
-                        <a href="#" class="btn btn-primary mt-3">Learn More</a>
+<section class="curriculum-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>Our Standard Curriculum</h2>
+            <p class="text-muted">Tailored programs for different age groups</p>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-6 mb-4">
+                <div class="curriculum-card nursery">
+                    <div class="row g-0">
+                        <div class="col-md-5">
+                            <img src="https://images.unsplash.com/photo-1600494603989-9650cf6ddd3d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+                                 alt="Nursery Program" 
+                                 class="img-fluid h-100 curriculum-image">
+                        </div>
+                        <div class="col-md-7">
+                            <div class="curriculum-content p-3">
+                                <h3 class="curriculum-title">Nursery Program</h3>
+                                <p>Our nursery program focuses on foundational learning through play and discovery. We emphasize:</p>
+                                <ul>
+                                    <li>Early literacy and numeracy skills</li>
+                                    <li>Social and emotional development</li>
+                                    <li>Creative expression through art and music</li>
+                                    <li>Basic Christian values and character building</li>
+                                    <li>Physical coordination and motor skills</li>
+                                </ul>
+                                <a href="#" class="btn btn-primary mt-2">Learn More</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="col-lg-6">
-                    <div class="curriculum-card primary">
-                        <h3 class="curriculum-title">Primary Program</h3>
-                        <p>Our primary program builds on the foundation with a comprehensive curriculum that includes:</p>
-                        <ul>
-                            <li>Core subjects (English, Math, Science, Social Studies)</li>
-                            <li>Christian Religious Education</li>
-                            <li>Physical Education and Sports</li>
-                            <li>Performing Arts and Creative Arts</li>
-                            <li>Life skills and leadership training</li>
-                        </ul>
-                        <a href="#" class="btn btn-secondary mt-3">Learn More</a>
+            </div>
+            
+            <div class="col-lg-6 mb-4">
+                <div class="curriculum-card primary">
+                    <div class="row g-0">
+                        <div class="col-md-5">
+                            <img src="https://images.unsplash.com/photo-1588072432836-e10032774350?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+                                 alt="Primary Program" 
+                                 class="img-fluid h-100 curriculum-image">
+                        </div>
+                        <div class="col-md-7">
+                            <div class="curriculum-content p-3">
+                                <h3 class="curriculum-title">Primary Program</h3>
+                                <p>Our primary program builds on the foundation with a comprehensive curriculum that includes:</p>
+                                <ul>
+                                    <li>Core subjects (English, Math, Science, Social Studies)</li>
+                                    <li>Christian Religious Education</li>
+                                    <li>Physical Education and Sports</li>
+                                    <li>Performing Arts and Creative Arts</li>
+                                    <li>Life skills and leadership training</li>
+                                </ul>
+                                <a href="#" class="btn btn-secondary mt-2">Learn More</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
     
     <!-- Contact Form Section -->
     <section class="contact-form-section">
