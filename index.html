@@ -615,6 +615,54 @@
             color: white;
             padding: 50px 0 20px;
         }
+
+         /* Logo and Text Styling */
+    .logo-container {
+        height: 100%;
+    }
+    
+    .logo-img {
+        height: 50px;
+        width: auto;
+        object-fit: contain;
+    }
+    
+    .logo-text {
+        line-height: 1.2;
+    }
+    
+    .school-name {
+        font-family: 'Roboto', sans-serif;
+        font-weight: 700;
+        font-size: 18px;
+        color: var(--primary-color);
+        margin-bottom: 2px;
+    }
+    
+    .school-tagline {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 500;
+        font-size: 12px;
+        color: var(--dark-color);
+        font-style: italic;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 992px) {
+        .school-name {
+            font-size: 16px;
+        }
+        
+        .school-tagline {
+            font-size: 11px;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .logo-text {
+            display: none;
+        }
+    }
         
         @media (max-width: 768px) {
             .parent-gallery {
@@ -646,36 +694,40 @@
     </div>
     
     <!-- Main Header -->
-    <header class="main-header">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-3 col-md-6 col-6">
-                    <div class="logo">
-                        <img src="https://lh3.googleusercontent.com/a-/ALV-UjWYzTaYLkNPThKa35zFjPMb7Oh5AmrBIjbh0GPImjEwenBzJdU=s100-p-k-no-mo" alt="Train Up A Child Logo">
+<header class="main-header">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-3 col-md-6 col-6">
+                <div class="logo-container d-flex align-items-center">
+                    <img src="https://lh3.googleusercontent.com/a-/ALV-UjWYzTaYLkNPThKa35zFjPMb7Oh5AmrBIjbh0GPImjEwenBzJdU=s100-p-k-no-mo" alt="Train Up A Child Logo" class="logo-img">
+                    <div class="logo-text ms-3">
+                        <div class="school-name">Train Up A Child</div>
+                        <div class="school-tagline">In God We Trust</div>
                     </div>
                 </div>
-                <div class="col-lg-9 col-md-6 col-6">
-                    <nav class="navbar navbar-expand-lg navbar-light p-0">
-                        <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarNav">
-                            <ul class="navbar-nav ms-auto main-menu">
-                                <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#">About</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#">Academics</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#">Admissions</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#">Events</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#">Gallery</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-                                <li class="nav-item ms-2"><a class="btn btn-secondary" href="#">Enroll Now</a></li>
-                            </ul>
-                        </div>
-                    </nav>
-                </div>
+            </div>
+            <div class="col-lg-9 col-md-6 col-6">
+                <nav class="navbar navbar-expand-lg navbar-light p-0">
+                    <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-auto main-menu">
+                            <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Academics</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Admissions</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Events</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Gallery</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                            <li class="nav-item ms-2"><a class="btn btn-secondary" href="#">Enroll Now</a></li>
+                        </ul>
+                    </div>
+                </nav>
             </div>
         </div>
-    </header>
+    </div>
+</header>
     
     <!-- Hero Carousel -->
     <div id="heroCarousel" class="carousel slide hero-carousel" data-bs-ride="carousel">
