@@ -81,28 +81,107 @@
             background-color: var(--primary-color);
         }
         
-        /* Hero Section */
-        .hero-section {
-            background: linear-gradient(rgba(0, 163, 224, 0.85), rgba(0, 163, 224, 0.85)), 
-                        url('https://lh3.googleusercontent.com/p/AF1QipOOuOudRBwyd6ivI-pbsJ6Rquymic9p9yN-ZGgi=s680-w680-h510-rw') center/cover;
-            color: white;
-            padding: 120px 0;
+        /* Hero Carousel */
+        .hero-carousel {
             position: relative;
+            overflow: hidden;
+            height: 600px;
+        }
+        
+        .carousel-inner {
+            height: 100%;
+        }
+        
+        .carousel-item {
+            height: 100%;
+            transition: transform 1s ease-in-out;
+        }
+        
+        .carousel-item.active {
+            display: flex;
+        }
+        
+        .hero-content-wrapper {
+            display: flex;
+            height: 100%;
+            align-items: center;
+        }
+        
+        .hero-text-col, .hero-image-col {
+            flex: 0 0 50%;
+            max-width: 50%;
+        }
+        
+        .hero-image-col {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+        }
+        
+        .hero-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
         }
         
         .hero-content {
-            max-width: 700px;
+            padding: 0 60px;
         }
         
         .hero-title {
-            font-size: 48px;
+            font-size: 42px;
             line-height: 1.2;
             margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
         }
         
         .hero-subtitle {
-            font-size: 20px;
+            font-size: 18px;
             margin-bottom: 30px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease 0.2s;
+        }
+        
+        .hero-buttons {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease 0.4s;
+        }
+        
+        .carousel-item.active .hero-title,
+        .carousel-item.active .hero-subtitle,
+        .carousel-item.active .hero-buttons {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Alternate layout for even slides */
+        .carousel-item:nth-child(even) .hero-content-wrapper {
+            flex-direction: row-reverse;
+        }
+        
+        /* Carousel Indicators */
+        .carousel-indicators {
+            bottom: 30px;
+        }
+        
+        .carousel-indicators button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid white;
+            background: transparent;
+            margin: 0 5px;
+        }
+        
+        .carousel-indicators button.active {
+            background: white;
         }
         
         /* Features Section */
@@ -135,149 +214,6 @@
             background-color: var(--primary-color);
         }
         
-        .feature-box {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            text-align: center;
-            margin-bottom: 30px;
-            transition: all 0.3s;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        }
-        
-        .feature-box:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-        }
-        
-        .feature-icon {
-            width: 80px;
-            height: 80px;
-            line-height: 80px;
-            background-color: rgba(0, 163, 224, 0.1);
-            border-radius: 50%;
-            margin: 0 auto 20px;
-            font-size: 32px;
-            color: var(--primary-color);
-        }
-        
-        /* Classes Section */
-        .classes-section {
-            padding: 80px 0;
-        }
-        
-        .class-card {
-            border-radius: 8px;
-            overflow: hidden;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: all 0.3s;
-        }
-        
-        .class-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-        }
-        
-        .class-img {
-            height: 200px;
-            overflow: hidden;
-        }
-        
-        .class-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-        
-        .class-card:hover .class-img img {
-            transform: scale(1.1);
-        }
-        
-        .class-body {
-            padding: 20px;
-            background: white;
-        }
-        
-        .class-age {
-            color: var(--primary-color);
-            font-weight: 600;
-        }
-        
-        /* CTA Section */
-        .cta-section {
-            padding: 80px 0;
-            background-color: var(--primary-color);
-            color: white;
-            text-align: center;
-        }
-        
-        /* Footer */
-        footer {
-            background-color: var(--dark-color);
-            color: white;
-            padding: 60px 0 20px;
-        }
-        
-        .footer-logo {
-            font-size: 24px;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 20px;
-            display: inline-block;
-        }
-        
-        .footer-links h4 {
-            font-size: 18px;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 10px;
-        }
-        
-        .footer-links h4:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--primary-color);
-        }
-        
-        .footer-links ul {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .footer-links li {
-            margin-bottom: 10px;
-        }
-        
-        .footer-links a {
-            color: #bbb;
-            transition: all 0.3s;
-            text-decoration: none;
-        }
-        
-        .footer-links a:hover {
-            color: white;
-            padding-left: 5px;
-        }
-        
-        .footer-contact i {
-            width: 20px;
-            text-align: center;
-            margin-right: 10px;
-            color: var(--primary-color);
-        }
-        
-        .footer-bottom {
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 20px;
-            margin-top: 40px;
-        }
-        
         /* Buttons */
         .btn-primary {
             background-color: var(--primary-color);
@@ -300,21 +236,38 @@
             font-weight: 600;
         }
         
-        /* Animations */
-        .animate-up {
-            animation: fadeInUp 1s both;
-        }
-        
-        .animate-delay-1 {
-            animation-delay: 0.2s;
-        }
-        
-        .animate-delay-2 {
-            animation-delay: 0.4s;
-        }
-        
-        .animate-delay-3 {
-            animation-delay: 0.6s;
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .hero-carousel {
+                height: auto;
+            }
+            
+            .hero-content-wrapper {
+                flex-direction: column !important;
+            }
+            
+            .hero-text-col, .hero-image-col {
+                flex: 0 0 100%;
+                max-width: 100%;
+                padding: 30px;
+            }
+            
+            .hero-image {
+                height: 300px;
+            }
+            
+            .hero-content {
+                padding: 0 20px;
+                text-align: center;
+            }
+            
+            .hero-buttons {
+                justify-content: center;
+            }
+            
+            .carousel-indicators {
+                bottom: 10px;
+            }
         }
     </style>
 </head>
@@ -343,7 +296,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-3 col-md-6 col-6">
                     <div class="logo">
-                        <img src="https://lh3.googleusercontent.com/a-/ALV-UjWYzTaYLkNPThKa35zFjPMb7Oh5AmrBIjbh0GPImjEwenBzJdU=s100-p-k-no-mo" alt="School Logo">
+                        <img src="https://via.placeholder.com/180x50?text=School+Logo" alt="School Logo">
                     </div>
                 </div>
                 <div class="col-lg-9 col-md-6 col-6">
@@ -369,23 +322,102 @@
         </div>
     </header>
     
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-7">
-                    <div class="hero-content animate__animated animate__fadeInLeft">
-                        <h1 class="hero-title">Quality Education for Your Child's Bright Future</h1>
-                        <p class="hero-subtitle">We provide a nurturing environment that helps children develop intellectually, socially and emotionally.</p>
-                        <div class="d-flex gap-3">
-                            <a href="#" class="btn btn-light btn-lg px-4">Learn More</a>
-                            <a href="#" class="btn btn-outline-light btn-lg px-4">Our Programs</a>
+    <!-- Hero Carousel -->
+    <div id="heroCarousel" class="carousel slide hero-carousel" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="3"></button>
+        </div>
+        
+        <div class="carousel-inner">
+            <!-- Slide 1 -->
+            <div class="carousel-item active" style="background-color: #5d9cec;">
+                <div class="hero-content-wrapper">
+                    <div class="hero-text-col">
+                        <div class="hero-content text-white">
+                            <h1 class="hero-title">Quality Education for Your Child's Future</h1>
+                            <p class="hero-subtitle">We provide a nurturing environment that helps children develop intellectually, socially and emotionally with our comprehensive curriculum.</p>
+                            <div class="hero-buttons d-flex gap-3">
+                                <a href="#" class="btn btn-light btn-lg px-4">Learn More</a>
+                                <a href="#" class="btn btn-outline-light btn-lg px-4">Our Programs</a>
+                            </div>
                         </div>
+                    </div>
+                    <div class="hero-image-col">
+                        <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Happy children learning" class="hero-image">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 2 -->
+            <div class="carousel-item" style="background-color: #f5a623;">
+                <div class="hero-content-wrapper">
+                    <div class="hero-text-col">
+                        <div class="hero-content text-white">
+                            <h1 class="hero-title">Creative Learning Environment</h1>
+                            <p class="hero-subtitle">Our modern facilities and innovative teaching methods inspire creativity and curiosity in every child.</p>
+                            <div class="hero-buttons d-flex gap-3">
+                                <a href="#" class="btn btn-light btn-lg px-4">View Facilities</a>
+                                <a href="#" class="btn btn-outline-light btn-lg px-4">Meet Our Teachers</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero-image-col">
+                        <img src="https://images.unsplash.com/photo-1588072432836-e10032774350?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Creative classroom" class="hero-image">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 3 -->
+            <div class="carousel-item" style="background-color: #2c3e50;">
+                <div class="hero-content-wrapper">
+                    <div class="hero-text-col">
+                        <div class="hero-content text-white">
+                            <h1 class="hero-title">Extracurricular Activities</h1>
+                            <p class="hero-subtitle">From sports to arts, we offer diverse programs to help children discover and develop their talents.</p>
+                            <div class="hero-buttons d-flex gap-3">
+                                <a href="#" class="btn btn-light btn-lg px-4">See Activities</a>
+                                <a href="#" class="btn btn-outline-light btn-lg px-4">Join Today</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero-image-col">
+                        <img src="https://images.unsplash.com/photo-1541178735493-479c1a27ed24?ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80" alt="Children playing sports" class="hero-image">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 4 -->
+            <div class="carousel-item" style="background-color: #ff6b6b;">
+                <div class="hero-content-wrapper">
+                    <div class="hero-text-col">
+                        <div class="hero-content text-white">
+                            <h1 class="hero-title">Safe & Supportive Community</h1>
+                            <p class="hero-subtitle">Our dedicated staff creates a welcoming environment where every child feels valued and supported.</p>
+                            <div class="hero-buttons d-flex gap-3">
+                                <a href="#" class="btn btn-light btn-lg px-4">Schedule a Visit</a>
+                                <a href="#" class="btn btn-outline-light btn-lg px-4">Contact Us</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero-image-col">
+                        <img src="https://images.unsplash.com/photo-1588075592446-265fd1e6e76f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Teacher helping student" class="hero-image">
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+        
+        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
     
     <!-- Features Section -->
     <section class="features-section">
@@ -397,7 +429,7 @@
             
             <div class="row">
                 <div class="col-lg-4 col-md-6">
-                    <div class="feature-box animate-up">
+                    <div class="feature-box animate__animated animate__fadeInUp">
                         <div class="feature-icon">
                             <i class="fas fa-graduation-cap"></i>
                         </div>
@@ -407,7 +439,7 @@
                 </div>
                 
                 <div class="col-lg-4 col-md-6">
-                    <div class="feature-box animate-up animate-delay-1">
+                    <div class="feature-box animate__animated animate__fadeInUp animate__delay-1s">
                         <div class="feature-icon">
                             <i class="fas fa-book-open"></i>
                         </div>
@@ -417,7 +449,7 @@
                 </div>
                 
                 <div class="col-lg-4 col-md-6">
-                    <div class="feature-box animate-up animate-delay-2">
+                    <div class="feature-box animate__animated animate__fadeInUp animate__delay-2s">
                         <div class="feature-icon">
                             <i class="fas fa-child"></i>
                         </div>
@@ -428,145 +460,7 @@
             </div>
         </div>
     </section>
-    
-    <!-- Classes Section -->
-    <section class="classes-section">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Programs</h2>
-                <p class="text-muted">Age-appropriate learning for every child</p>
-            </div>
-            
-            <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    <div class="class-card animate-up">
-                        <div class="class-img">
-                            <img src="https://lh3.googleusercontent.com/p/AF1QipOOuOudRBwyd6ivI-pbsJ6Rquymic9p9yN-ZGgi=s680-w680-h510-rw" alt="Play Group">
-                        </div>
-                        <div class="class-body">
-                            <h5>Play Group</h5>
-                            <p class="class-age">Age: 2-3 years</p>
-                            <p>Our playgroup program focuses on developing social skills and early learning through play.</p>
-                            <a href="#" class="btn btn-primary mt-3">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-6">
-                    <div class="class-card animate-up animate-delay-1">
-                        <div class="class-img">
-                            <img src="https://images.unsplash.com/photo-1588072432836-e10032774350?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Nursery">
-                        </div>
-                        <div class="class-body">
-                            <h5>Nursery</h5>
-                            <p class="class-age">Age: 3-4 years</p>
-                            <p>Our nursery program introduces structured learning while maintaining a playful environment.</p>
-                            <a href="#" class="btn btn-primary mt-3">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-6">
-                    <div class="class-card animate-up animate-delay-2">
-                        <div class="class-img">
-                            <img src="https://images.unsplash.com/photo-1588075592446-265fd1e6e76f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Kindergarten">
-                        </div>
-                        <div class="class-body">
-                            <h5>Kindergarten</h5>
-                            <p class="class-age">Age: 4-6 years</p>
-                            <p>Our kindergarten program prepares children for elementary school with a balanced curriculum.</p>
-                            <a href="#" class="btn btn-primary mt-3">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8 text-center">
-                    <h2 class="mb-4">Ready to Give Your Child the Best Education?</h2>
-                    <p class="mb-5">Join our school community and watch your child grow in a nurturing environment with expert educators.</p>
-                    <a href="#" class="btn btn-light btn-lg px-4 me-3">Schedule a Visit</a>
-                    <a href="#" class="btn btn-outline-light btn-lg px-4">Enroll Now</a>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 mb-5 mb-lg-0">
-                    <a href="#" class="footer-logo">
-                        <img src="https://via.placeholder.com/180x50?text=School+Logo" alt="School Logo" style="filter: brightness(0) invert(1);">
-                    </a>
-                    <p>We provide quality education in a nurturing environment that helps children develop intellectually, socially and emotionally.</p>
-                    <div class="social-icons mt-4">
-                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-white"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-                
-                <div class="col-lg-2 col-md-4 mb-5 mb-md-0">
-                    <div class="footer-links">
-                        <h4>Quick Links</h4>
-                        <ul>
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Academics</a></li>
-                            <li><a href="#">Admissions</a></li>
-                            <li><a href="#">Gallery</a></li>
-                            <li><a href="#">Contact</a></li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="col-lg-3 col-md-4 mb-5 mb-md-0">
-                    <div class="footer-links">
-                        <h4>Programs</h4>
-                        <ul>
-                            <li><a href="#">Play Group</a></li>
-                            <li><a href="#">Nursery</a></li>
-                            <li><a href="#">Kindergarten</a></li>
-                            <li><a href="#">Elementary</a></li>
-                            <li><a href="#">After School</a></li>
-                            <li><a href="#">Summer Camp</a></li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="col-lg-3 col-md-4">
-                    <div class="footer-contact">
-                        <h4>Contact Us</h4>
-                        <p><i class="fas fa-map-marker-alt"></i> 123 School St, Education City</p>
-                        <p><i class="fas fa-phone-alt"></i> +1 (234) 567-8900</p>
-                        <p><i class="fas fa-envelope"></i> info@kidschool.com</p>
-                        <p><i class="fas fa-clock"></i> Mon-Fri: 8:00 AM - 5:00 PM</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <div class="row">
-                    <div class="col-md-6">
-                        <p>&copy; 2023 Kids School. All Rights Reserved.</p>
-                    </div>
-                    <div class="col-md-6 text-md-end">
-                        <a href="#" class="text-white me-3">Privacy Policy</a>
-                        <a href="#" class="text-white">Terms of Service</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
@@ -582,21 +476,34 @@
             }
         });
         
-        // Animation on scroll
-        function animateOnScroll() {
-            const elements = document.querySelectorAll('.animate-up');
-            elements.forEach(element => {
-                const elementPosition = element.getBoundingClientRect().top;
-                const screenPosition = window.innerHeight / 1.2;
-                
-                if (elementPosition < screenPosition) {
-                    element.classList.add('animate__animated', 'animate__fadeInUp');
-                }
-            });
-        }
-        
-        window.addEventListener('scroll', animateOnScroll);
-        document.addEventListener('DOMContentLoaded', animateOnScroll);
+        // Reset animations when slide changes
+        document.getElementById('heroCarousel').addEventListener('slide.bs.carousel', function () {
+            const activeItem = this.querySelector('.active');
+            const title = activeItem.querySelector('.hero-title');
+            const subtitle = activeItem.querySelector('.hero-subtitle');
+            const buttons = activeItem.querySelector('.hero-buttons');
+            
+            // Reset animations
+            title.style.opacity = '0';
+            title.style.transform = 'translateY(30px)';
+            subtitle.style.opacity = '0';
+            subtitle.style.transform = 'translateY(30px)';
+            buttons.style.opacity = '0';
+            buttons.style.transform = 'translateY(30px)';
+            
+            // Trigger reflow to restart animations
+            void title.offsetWidth;
+            void subtitle.offsetWidth;
+            void buttons.offsetWidth;
+            
+            // Apply animated state
+            title.style.opacity = '1';
+            title.style.transform = 'translateY(0)';
+            subtitle.style.opacity = '1';
+            subtitle.style.transform = 'translateY(0)';
+            buttons.style.opacity = '1';
+            buttons.style.transform = 'translateY(0)';
+        });
     </script>
 </body>
 </html>
