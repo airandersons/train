@@ -820,6 +820,68 @@
                 grid-template-columns: repeat(2, 1fr);
             }
         }
+    /* Logo and Text Styling */
+    .logo-container {
+        height: 100%;
+    }
+    
+    .logo-img {
+        height: 40px; /* Reduced from 50px for mobile */
+        width: auto;
+        object-fit: contain;
+    }
+    
+    .logo-text {
+        line-height: 1.2;
+    }
+    
+    .school-name {
+        font-family: 'Roboto', sans-serif;
+        font-weight: 700;
+        font-size: 16px; /* Base size for mobile */
+        color: var(--primary-color);
+        margin-bottom: 2px;
+        white-space: nowrap; /* Prevents text wrapping */
+    }
+    
+    .school-tagline {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 500;
+        font-size: 10px; /* Base size for mobile */
+        color: var(--dark-color);
+        font-style: italic;
+        white-space: nowrap; /* Prevents text wrapping */
+    }
+    
+    /* Responsive adjustments */
+    @media (min-width: 576px) {
+        .logo-img {
+            height: 50px; /* Original size on larger screens */
+        }
+        .school-name {
+            font-size: 18px;
+        }
+        .school-tagline {
+            font-size: 12px;
+        }
+    }
+    
+    @media (min-width: 768px) {
+        .school-name {
+            font-size: 20px;
+        }
+        .school-tagline {
+            font-size: 13px;
+        }
+    }
+    
+    /* Mobile menu button adjustment */
+    @media (max-width: 991.98px) {
+        .navbar-toggler {
+            padding: 0.25rem;
+            font-size: 1rem;
+        }
+    }
     </style>
 </head>
 <body>
@@ -838,20 +900,22 @@
         </div>
     </div>
     
-    <!-- Main Header -->
+<!-- Main Header -->
 <header class="main-header">
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-lg-3 col-md-6 col-6">
+            <div class="col-lg-3 col-md-6 col-8"> <!-- Changed from col-6 to col-8 to accommodate text -->
                 <div class="logo-container d-flex align-items-center">
-                    <img src="https://lh3.googleusercontent.com/a-/ALV-UjWYzTaYLkNPThKa35zFjPMb7Oh5AmrBIjbh0GPImjEwenBzJdU=s100-p-k-no-mo" alt="Train Up A Child Logo" class="logo-img">
-                    <div class="logo-text ms-3">
+                    <img src="https://lh3.googleusercontent.com/a-/ALV-UjWYzTaYLkNPThKa35zFjPMb7Oh5AmrBIjbh0GPImjEwenBzJdU=s100-p-k-no-mo" 
+                         alt="Train Up A Child Logo" 
+                         class="logo-img">
+                    <div class="logo-text ms-2 ms-md-3"> <!-- Reduced left margin on mobile -->
                         <div class="school-name">Train Up A Child</div>
                         <div class="school-tagline">In God We Trust</div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-9 col-md-6 col-6">
+            <div class="col-lg-9 col-md-6 col-4"> <!-- Changed from col-6 to col-4 to balance space -->
                 <nav class="navbar navbar-expand-lg navbar-light p-0">
                     <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                         <span class="navbar-toggler-icon"></span>
