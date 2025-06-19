@@ -15,26 +15,33 @@
     <!-- Custom CSS -->
     <style>
         :root {
-            --primary-color: #00a3e0;
-            --secondary-color: #ff6b6b;
-            --accent-color: #feca57;
+            --primary-color: #3498db;
+            --secondary-color: #e74c3c;
+            --accent-color: #f1c40f;
             --dark-color: #2c3e50;
-            --light-color: #f5f6fa;
-            --blue-text: #1e88e5;
-            --orange-text: #ff7043;
-            --purple-text: #7e57c2;
+            --light-color: #ecf0f1;
+            --success-color: #2ecc71;
+            --purple-color: #9b59b6;
+            --orange-color: #e67e22;
+            --teal-color: #1abc9c;
         }
         
         body {
             font-family: 'Poppins', sans-serif;
             color: #333;
             overflow-x: hidden;
+            line-height: 1.6;
         }
         
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Roboto', sans-serif;
             font-weight: 700;
         }
+        
+        h1 { color: var(--dark-color); }
+        h2 { color: var(--primary-color); }
+        h3 { color: var(--secondary-color); }
+        h4 { color: var(--teal-color); }
         
         /* Header Styles */
         .top-bar {
@@ -82,6 +89,7 @@
         .main-menu .nav-link.active {
             color: white !important;
             background-color: var(--primary-color);
+            transform: translateY(-2px);
         }
         
         /* Hero Carousel */
@@ -89,6 +97,7 @@
             position: relative;
             overflow: hidden;
             height: 600px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
         }
         
         .carousel-inner {
@@ -98,10 +107,6 @@
         .carousel-item {
             height: 100%;
             transition: transform 1s ease-in-out;
-        }
-        
-        .carousel-item.active {
-            display: flex;
         }
         
         .hero-content-wrapper {
@@ -128,6 +133,7 @@
             object-fit: cover;
             border-radius: 10px;
             box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            border: 5px solid white;
         }
         
         .hero-content {
@@ -141,6 +147,7 @@
             opacity: 0;
             transform: translateY(30px);
             transition: all 0.8s ease;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
         }
         
         .hero-subtitle {
@@ -149,6 +156,7 @@
             opacity: 0;
             transform: translateY(30px);
             transition: all 0.8s ease 0.2s;
+            color: #555;
         }
         
         .hero-buttons {
@@ -164,45 +172,11 @@
             transform: translateY(0);
         }
         
-        /* Text colors for hero section */
-        .hero-title.blue {
-            color: var(--blue-text);
-        }
-        
-        .hero-title.orange {
-            color: var(--orange-text);
-        }
-        
-        .hero-title.purple {
-            color: var(--purple-text);
-        }
-        
-        .hero-subtitle.black {
-            color: #333;
-        }
-        
-        /* Alternate layout for even slides */
-        .carousel-item:nth-child(even) .hero-content-wrapper {
-            flex-direction: row-reverse;
-        }
-        
-        /* Carousel Indicators */
-        .carousel-indicators {
-            bottom: 30px;
-        }
-        
-        .carousel-indicators button {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            border: 2px solid white;
-            background: transparent;
-            margin: 0 5px;
-        }
-        
-        .carousel-indicators button.active {
-            background: white;
-        }
+        /* Slide-specific colors */
+        .slide-1 .hero-title { color: var(--primary-color); }
+        .slide-2 .hero-title { color: var(--secondary-color); }
+        .slide-3 .hero-title { color: var(--teal-color); }
+        .slide-4 .hero-title { color: var(--purple-color); }
         
         /* Features Icons Section */
         .features-icons-section {
@@ -217,6 +191,7 @@
             transition: all 0.3s;
             margin-bottom: 30px;
             background-color: var(--light-color);
+            border-bottom: 4px solid var(--primary-color);
         }
         
         .feature-icon-box:hover {
@@ -242,10 +217,12 @@
             margin-bottom: 30px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             transition: all 0.3s;
+            border-left: 4px solid var(--primary-color);
         }
         
         .reason-card:hover {
             transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
         }
         
         .reason-img {
@@ -282,256 +259,60 @@
         
         .curriculum-card {
             border-radius: 10px;
-            padding: 30px;
-            margin-bottom: 30px;
-            transition: all 0.3s;
+            overflow: hidden;
             height: 100%;
-            background-color: var(--light-color);
-        }
-        
-        .curriculum-card.nursery {
-            border-top: 5px solid var(--primary-color);
-        }
-        
-        .curriculum-card.primary {
-            border-top: 5px solid var(--secondary-color);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
         }
         
         .curriculum-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .curriculum-card.nursery {
+            border-left: 5px solid var(--primary-color);
+        }
+        
+        .curriculum-card.primary {
+            border-left: 5px solid var(--secondary-color);
+        }
+        
+        .curriculum-image {
+            object-fit: cover;
+            min-height: 250px;
+        }
+        
+        .curriculum-content {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 25px;
         }
         
         .curriculum-title {
-            font-size: 24px;
-            margin-bottom: 20px;
+            font-size: 22px;
+            margin-bottom: 15px;
             color: var(--dark-color);
         }
         
-        /* Contact Form Section */
-        .contact-form-section {
-            padding: 80px 0;
-            background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+        .curriculum-card ul {
+            padding-left: 20px;
+            margin-bottom: 15px;
         }
         
-        .form-container {
-            background: white;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-        
-        .form-title {
-            color: var(--primary-color);
-            margin-bottom: 30px;
-        }
-        
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            grid-gap: 15px;
-        }
-        
-        .gallery-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 8px;
-            transition: transform 0.3s;
-        }
-        
-        .gallery-img:hover {
-            transform: scale(1.05);
-        }
-        
-        .gallery-item:first-child {
-            grid-column: span 2;
-            grid-row: span 2;
-        }
-        
-        /* Director Section */
-        .director-section {
-            padding: 80px 0;
-            background-color: white;
-        }
-        
-        .director-card {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-        
-        .director-img {
+        .curriculum-card li {
+            margin-bottom: 8px;
             position: relative;
-            height: 100%;
+            padding-left: 15px;
         }
         
-        .director-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .director-social {
+        .curriculum-card li:before {
+            content: "•";
+            color: var(--primary-color);
             position: absolute;
-            bottom: 0;
             left: 0;
-            right: 0;
-            background: rgba(0,0,0,0.7);
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            opacity: 0;
-            transition: all 0.3s;
-        }
-        
-        .director-img:hover .director-social {
-            opacity: 1;
-        }
-        
-        .director-social a {
-            color: white;
-            font-size: 20px;
-            margin: 0 15px;
-            transition: all 0.3s;
-        }
-        
-        .director-social a:hover {
-            color: var(--primary-color);
-            transform: translateY(-5px);
-        }
-        
-        .director-message {
-            padding: 40px;
-            background: white;
-        }
-        
-        .director-name {
-            color: var(--primary-color);
-            margin-bottom: 20px;
-        }
-        
-        /* Testimonials Section */
-        .testimonials-section {
-            padding: 80px 0;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-        }
-        
-        .testimonial-main {
-            margin-bottom: 30px;
-        }
-        
-        .testimonial-img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid white;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-        }
-        
-        .testimonial-text {
-            font-style: italic;
-            margin-bottom: 20px;
-        }
-        
-        .testimonial-author {
-            font-weight: 600;
-            color: var(--primary-color);
-        }
-        
-        .parent-gallery {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-gap: 15px;
-        }
-        
-        .parent-thumb {
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .parent-thumb img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 8px;
-            border: 3px solid transparent;
-        }
-        
-        .parent-thumb.active img,
-        .parent-thumb:hover img {
-            border-color: var(--primary-color);
-        }
-        
-        /* Stats Section */
-        .stats-section {
-            padding: 80px 0;
-            background-color: var(--primary-color);
-            color: white;
-            text-align: center;
-        }
-        
-        .stat-icon {
-            width: 80px;
-            height: 80px;
-            background: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            color: var(--primary-color);
-            font-size: 30px;
-            transform: rotate(45deg);
-        }
-        
-        .stat-icon i {
-            transform: rotate(-45deg);
-        }
-        
-        .stat-number {
-            font-size: 36px;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-        
-        /* News Section */
-        .news-section {
-            padding: 80px 0;
-            background-color: white;
-        }
-        
-        .main-news {
-            margin-bottom: 30px;
-        }
-        
-        .main-news-img {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-        
-        .news-item {
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-        }
-        
-        .news-thumb {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-right: 15px;
-        }
-        
-        .news-date {
-            font-size: 12px;
-            color: #777;
+            font-weight: bold;
         }
         
         /* Buttons */
@@ -540,6 +321,13 @@
             border-color: var(--primary-color);
             padding: 10px 25px;
             font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(41, 128, 185, 0.3);
         }
         
         .btn-secondary {
@@ -548,20 +336,38 @@
             color: white;
             padding: 10px 25px;
             font-weight: 600;
+            transition: all 0.3s;
         }
         
-        .btn-outline-light {
-            border-width: 2px;
+        .btn-secondary:hover {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(192, 57, 43, 0.3);
+        }
+        
+        .btn-outline-primary {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
             padding: 10px 25px;
             font-weight: 600;
+            transition: all 0.3s;
         }
         
+        .btn-outline-primary:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(41, 128, 185, 0.3);
+        }
+        
+        /* Links */
         .read-more {
             color: var(--primary-color);
             font-weight: 600;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
+            transition: all 0.3s;
         }
         
         .read-more i {
@@ -569,8 +375,41 @@
             transition: all 0.3s;
         }
         
+        .read-more:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+        
         .read-more:hover i {
             transform: translateX(5px);
+        }
+        
+        /* Section Titles */
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary-color);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .section-title p {
+            color: #666;
+            margin-top: 15px;
         }
         
         /* Responsive adjustments */
@@ -601,287 +440,124 @@
             .hero-buttons {
                 justify-content: center;
             }
-            
-            .carousel-indicators {
-                bottom: 10px;
-            }
-            
-            .parent-gallery {
-                grid-template-columns: repeat(2, 1fr);
-            }
         }
+        
+        /* Footer Styles */
         footer {
-            background-color: #2c3e50;
+            background-color: var(--dark-color);
             color: white;
             padding: 50px 0 20px;
         }
-
-         /* Logo and Text Styling */
-    .logo-container {
-        height: 100%;
-    }
-    
-    .logo-img {
-        height: 50px;
-        width: auto;
-        object-fit: contain;
-    }
-    
-    .logo-text {
-        line-height: 1.2;
-    }
-    
-    .school-name {
-        font-family: 'Roboto', sans-serif;
-        font-weight: 700;
-        font-size: 18px;
-        color: var(--primary-color);
-        margin-bottom: 2px;
-    }
-    
-    .school-tagline {
-        font-family: 'Poppins', sans-serif;
-        font-weight: 500;
-        font-size: 12px;
-        color: var(--dark-color);
-        font-style: italic;
-    }
-    
-    /* Responsive adjustments */
-    @media (max-width: 992px) {
-        .school-name {
-            font-size: 16px;
+        
+        .footer-links h4 {
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
         }
         
-        .school-tagline {
-            font-size: 11px;
-        }
-    }
-
-        .curriculum-section {
-        padding: 80px 0;
-        background-color: white;
-    }
-    
-    .curriculum-card {
-        border-radius: 10px;
-        overflow: hidden;
-        height: 100%;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        transition: all 0.3s;
-    }
-    
-    .curriculum-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-    }
-    
-    .curriculum-card.nursery {
-        border-left: 5px solid var(--primary-color);
-    }
-    
-    .curriculum-card.primary {
-        border-left: 5px solid var(--secondary-color);
-    }
-    
-    .curriculum-image {
-        object-fit: cover;
-        min-height: 250px;
-    }
-    
-    .curriculum-content {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .curriculum-title {
-        font-size: 22px;
-        margin-bottom: 15px;
-        color: var(--dark-color);
-    }
-    
-    .curriculum-card ul {
-        padding-left: 20px;
-        margin-bottom: 15px;
-    }
-    
-    .curriculum-card li {
-        margin-bottom: 8px;
-    }
-        
-    /* Hero Carousel Styles */
-    .hero-carousel {
-        background-color: #f8f9fa;
-        padding: 20px 0;
-    }
-    
-    .carousel-item {
-        min-height: auto;
-        padding: 15px 0;
-    }
-    
-    .hero-content {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-    
-    .hero-title {
-        font-size: clamp(1.5rem, 4vw, 2.2rem);
-        line-height: 1.3;
-        margin-bottom: 15px;
-        color: #2c3e50;
-        font-weight: 700;
-    }
-    
-    .hero-subtitle {
-        font-size: clamp(0.9rem, 2.5vw, 1.1rem);
-        margin-bottom: 20px;
-        color: #495057;
-    }
-    
-    .hero-image {
-        border-radius: 8px;
-        max-height: 300px;
-        width: 100%;
-        object-fit: cover;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-    
-    .hero-buttons .btn {
-        font-size: 0.9rem;
-        padding: 8px 16px;
-    }
-    
-    /* Responsive Adjustments */
-    @media (max-width: 767.98px) {
-        .hero-carousel {
-            padding: 10px 0;
+        .footer-links h4:after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary-color);
+            bottom: 0;
+            left: 0;
         }
         
-        .carousel-item .row {
-            flex-direction: column-reverse;
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
         }
         
-        .hero-image {
-            max-height: 220px;
-            margin-bottom: 15px;
+        .footer-links li {
+            margin-bottom: 10px;
         }
         
-        .hero-content {
-            padding: 15px !important;
-            text-align: center;
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: all 0.3s;
         }
         
-        .hero-buttons {
-            justify-content: center;
+        .footer-links a:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
         }
-    }
-    
-    @media (min-width: 768px) {
-        .hero-carousel {
-            min-height: 400px;
-            display: flex;
+        
+        .social-icons a {
+            display: inline-flex;
             align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: all 0.3s;
         }
         
-        .hero-image {
-            max-height: 350px;
-        }
-    }
-    
-    @media (max-width: 768px) {
-        .curriculum-card {
-            flex-direction: column;
+        .social-icons a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
         }
         
-        .curriculum-image {
-            width: 100%;
-            height: 200px;
-        }
-    }
-    
-    @media (max-width: 768px) {
-        .logo-text {
-            display: none;
-        }
-    }
-        
-        @media (max-width: 768px) {
-            .parent-gallery {
-                grid-template-columns: repeat(3, 1fr);
-            }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            margin-top: 30px;
         }
         
-        @media (max-width: 576px) {
-            .parent-gallery {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        /* Logo and Text Styling */
+        .logo-container {
+            height: 100%;
         }
-    /* Logo and Text Styling */
-    .logo-container {
-        height: 100%;
-    }
-    
-    .logo-img {
-        height: 40px; /* Reduced from 50px for mobile */
-        width: auto;
-        object-fit: contain;
-    }
-    
-    .logo-text {
-        line-height: 1.2;
-    }
-    
-    .school-name {
-        font-family: 'Roboto', sans-serif;
-        font-weight: 700;
-        font-size: 16px; /* Base size for mobile */
-        color: var(--primary-color);
-        margin-bottom: 2px;
-        white-space: nowrap; /* Prevents text wrapping */
-    }
-    
-    .school-tagline {
-        font-family: 'Poppins', sans-serif;
-        font-weight: 500;
-        font-size: 10px; /* Base size for mobile */
-        color: var(--dark-color);
-        font-style: italic;
-        white-space: nowrap; /* Prevents text wrapping */
-    }
-    
-    /* Responsive adjustments */
-    @media (min-width: 576px) {
+        
         .logo-img {
-            height: 50px; /* Original size on larger screens */
+            height: 50px;
+            width: auto;
+            object-fit: contain;
         }
+        
+        .logo-text {
+            line-height: 1.2;
+        }
+        
         .school-name {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
             font-size: 18px;
+            color: var(--primary-color);
+            margin-bottom: 2px;
         }
+        
         .school-tagline {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
             font-size: 12px;
+            color: var(--dark-color);
+            font-style: italic;
         }
-    }
-    
-    @media (min-width: 768px) {
-        .school-name {
-            font-size: 20px;
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .logo-text {
+                display: none;
+            }
+            
+            .hero-title {
+                font-size: 32px;
+            }
+            
+            .hero-subtitle {
+                font-size: 16px;
+            }
+            
+            .footer-links {
+                margin-bottom: 30px;
+            }
         }
-        .school-tagline {
-            font-size: 13px;
-        }
-    }
-    
-    /* Mobile menu button adjustment */
-    @media (max-width: 991.98px) {
-        .navbar-toggler {
-            padding: 0.25rem;
-            font-size: 1rem;
-        }
-    }
     </style>
 </head>
 <body>
@@ -890,201 +566,195 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <i class="fas fa-phone-alt"></i> +256 772 413188
-                    <i class="fas fa-envelope ms-3"></i> info@trainupachild.com
+                    <i class="fas fa-phone-alt me-2"></i> +256 772 413188
+                    <i class="fas fa-envelope ms-3 me-2"></i> info@trainupachild.com
                 </div>
                 <div class="col-md-6 text-md-end">
-                    <span><i class="fas fa-map-marker-alt me-2"></i> Luthuli Drive, Najjanankumbi, Kampala</span>
+                    <i class="fas fa-map-marker-alt me-2"></i> Luthuli Drive, Najjanankumbi, Kampala
                 </div>
             </div>
         </div>
     </div>
     
-<!-- Main Header -->
-<header class="main-header">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-3 col-md-6 col-8"> <!-- Changed from col-6 to col-8 to accommodate text -->
-                <div class="logo-container d-flex align-items-center">
-                    <img src="img/logo.jpeg" 
-                         alt="Train Up A Child Logo" 
-                         class="logo-img">
-                    <div class="logo-text ms-2 ms-md-3"> <!-- Reduced left margin on mobile -->
-                        <div class="school-name">Train Up A Child</div>
-                        <div class="school-tagline">In God We Trust</div>
+    <!-- Main Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-3 col-md-6 col-8">
+                    <div class="logo-container d-flex align-items-center">
+                        <img src="img/logo.jpeg" alt="Train Up A Child Logo" class="logo-img">
+                        <div class="logo-text ms-2 ms-md-3">
+                            <div class="school-name">Train Up A Child</div>
+                            <div class="school-tagline">In God We Trust</div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-9 col-md-6 col-4"> <!-- Changed from col-6 to col-4 to balance space -->
-                <nav class="navbar navbar-expand-lg navbar-light p-0">
-                    <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav ms-auto main-menu">
-                            <li class="nav-item"><a class="nav-link active" href="home.html">Home</a></li>
-                            <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-                            <li class="nav-item"><a class="nav-link" href="accademics.html">Academics</a></li>
-                            <li class="nav-item"><a class="nav-link" href="admissions.html">Admissions</a></li>
-                            <li class="nav-item"><a class="nav-link" href="events.html">Events</a></li>
-                            <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
-                            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-                            <li class="nav-item ms-2"><a class="btn btn-secondary" href="enroll.html">Enroll Now</a></li>
-                        </ul>
-                    </div>
-                </nav>
+                <div class="col-lg-9 col-md-6 col-4">
+                    <nav class="navbar navbar-expand-lg navbar-light p-0">
+                        <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav ms-auto main-menu">
+                                <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                                <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                                <li class="nav-item"><a class="nav-link" href="academics.html">Academics</a></li>
+                                <li class="nav-item"><a class="nav-link" href="admissions.html">Admissions</a></li>
+                                <li class="nav-item"><a class="nav-link" href="events.html">Events</a></li>
+                                <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                                <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                                <li class="nav-item ms-2"><a class="btn btn-secondary" href="enroll.html">Enroll Now</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
             </div>
         </div>
-    </div>
-</header>
+    </header>
     
     <!-- Hero Carousel -->
-<div id="heroCarousel" class="carousel slide hero-carousel" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
-        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
-        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
-        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="3"></button>
+    <div id="heroCarousel" class="carousel slide hero-carousel" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="3"></button>
+        </div>
+        
+        <div class="carousel-inner">
+            <!-- Slide 1 -->
+            <div class="carousel-item active slide-1">
+                <div class="container">
+                    <div class="row g-0 align-items-center">
+                        <div class="col-md-6 order-md-1 order-2">
+                            <div class="hero-content p-3 p-lg-4">
+                                <h1 class="hero-title">Academic Excellence Rooted in Christian Values</h1>
+                                <p class="hero-subtitle">At Train Up A Child, we combine rigorous academics with strong moral foundations to develop well-rounded individuals prepared for life's challenges.</p>
+                                <div class="hero-buttons d-flex flex-wrap gap-2">
+                                    <a href="academics.html" class="btn btn-primary">Learn More</a>
+                                    <a href="programs.html" class="btn btn-outline-primary">Our Programs</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 order-md-2 order-1">
+                            <img src="img/academics.webp" alt="Happy children learning" class="img-fluid hero-image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 2 -->
+            <div class="carousel-item slide-2">
+                <div class="container">
+                    <div class="row g-0 align-items-center">
+                        <div class="col-md-6 order-md-1 order-2">
+                            <div class="hero-content p-3 p-lg-4">
+                                <h1 class="hero-title">Nurturing Tomorrow's Leaders Today</h1>
+                                <p class="hero-subtitle">Our holistic approach to education develops character, critical thinking, and creativity in every child through innovative teaching methods.</p>
+                                <div class="hero-buttons d-flex flex-wrap gap-2">
+                                    <a href="facilities.html" class="btn btn-primary">View Facilities</a>
+                                    <a href="staff.html" class="btn btn-outline-primary">Meet Our Teachers</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 order-md-2 order-1">
+                            <img src="img/creative-leaders.webp" alt="Creative classroom" class="img-fluid hero-image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 3 -->
+            <div class="carousel-item slide-3">
+                <div class="container">
+                    <div class="row g-0 align-items-center">
+                        <div class="col-md-6 order-md-1 order-2">
+                            <div class="hero-content p-3 p-lg-4">
+                                <h1 class="hero-title">Excellence in Education Since 1995</h1>
+                                <p class="hero-subtitle">With over 30 years of experience, we've perfected the balance of academic rigor and character development in a nurturing environment.</p>
+                                <div class="hero-buttons d-flex flex-wrap gap-2">
+                                    <a href="co-curricular.html" class="btn btn-primary">See Activities</a>
+                                    <a href="admission.html" class="btn btn-outline-primary">Join Today</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 order-md-2 order-1">
+                            <img src="img/excellence.jpg" alt="Children playing sports" class="img-fluid hero-image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 4 -->
+            <div class="carousel-item slide-4">
+                <div class="container">
+                    <div class="row g-0 align-items-center">
+                        <div class="col-md-6 order-md-1 order-2">
+                            <div class="hero-content p-3 p-lg-4">
+                                <h1 class="hero-title">In God We Trust</h1>
+                                <p class="hero-subtitle">Our motto reflects our commitment to raising God-fearing pupils who excel academically and morally in all aspects of life.</p>
+                                <div class="hero-buttons d-flex flex-wrap gap-2">
+                                    <a href="contact.html" class="btn btn-primary">Schedule a Visit</a>
+                                    <a href="contact.html" class="btn btn-outline-primary">Contact Us</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 order-md-2 order-1">
+                            <img src="img/prayer.jpg" alt="Teacher helping student" class="img-fluid hero-image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
-    
-    <div class="carousel-inner">
-        <!-- Slide 1 -->
-        <div class="carousel-item active">
-            <div class="container">
-                <div class="row g-0 align-items-center">
-                    <div class="col-md-6 order-md-1 order-2">
-                        <div class="hero-content p-3 p-lg-4">
-                            <h1 class="hero-title">Academic Excellence Rooted in Christian Values</h1>
-                            <p class="hero-subtitle">At Train Up A Child, we combine rigorous academics with strong moral foundations to develop well-rounded individuals.</p>
-                            <div class="hero-buttons d-flex flex-wrap gap-2">
-                                <a href="accademics.html" class="btn btn-primary">Learn More</a>
-                                <a href="programs.html" class="btn btn-outline-primary">Our Programs</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 order-md-2 order-1">
-                        <img src="img/accademics.webp" 
-                             alt="Happy children learning" 
-                             class="img-fluid hero-image">
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Slide 2 -->
-        <div class="carousel-item">
-            <div class="container">
-                <div class="row g-0 align-items-center">
-                    <div class="col-md-6 order-md-1 order-2">
-                        <div class="hero-content p-3 p-lg-4">
-                            <h1 class="hero-title">Nurturing Tomorrow's Leaders Today</h1>
-                            <p class="hero-subtitle">Our holistic approach to education develops character, critical thinking, and creativity in every child.</p>
-                            <div class="hero-buttons d-flex flex-wrap gap-2">
-                                <a href="facilities.html" class="btn btn-primary">View Facilities</a>
-                                <a href="staff.html" class="btn btn-outline-primary">Meet Our Teachers</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 order-md-2 order-1">
-                        <img src="img/creative-leaders.webp" 
-                             alt="Creative classroom" 
-                             class="img-fluid hero-image">
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Slide 3 -->
-        <div class="carousel-item">
-            <div class="container">
-                <div class="row g-0 align-items-center">
-                    <div class="col-md-6 order-md-1 order-2">
-                        <div class="hero-content p-3 p-lg-4">
-                            <h1 class="hero-title">Excellence in Education Since 1995</h1>
-                            <p class="hero-subtitle">With over 30 years of experience, we've perfected the balance of academic rigor and character development.</p>
-                            <div class="hero-buttons d-flex flex-wrap gap-2">
-                                <a href="cocurricular.html" class="btn btn-primary">See Activities</a>
-                                <a href="admission.html" class="btn btn-outline-primary">Join Today</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 order-md-2 order-1">
-                        <img src="img/excellence.jpg" 
-                             alt="Children playing sports" 
-                             class="img-fluid hero-image">
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Slide 4 -->
-        <div class="carousel-item">
-            <div class="container">
-                <div class="row g-0 align-items-center">
-                    <div class="col-md-6 order-md-1 order-2">
-                        <div class="hero-content p-3 p-lg-4">
-                            <h1 class="hero-title">In God We Trust</h1>
-                            <p class="hero-subtitle">Our motto reflects our commitment to raising God-fearing pupils who excel academically and morally.</p>
-                            <div class="hero-buttons d-flex flex-wrap gap-2">
-                                <a href="contact.html" class="btn btn-primary">Schedule a Visit</a>
-                                <a href="contact.html" class="btn btn-outline-primary">Contact Us</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 order-md-2 order-1">
-                        <img src="img/prayer.jpg" 
-                             alt="Teacher helping student" 
-                             class="img-fluid hero-image">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
-</div>
     
     <!-- Features Icons Section -->
     <section class="features-icons-section">
         <div class="container">
+            <div class="section-title">
+                <h2>Why Choose Our School</h2>
+                <p class="text-muted">Discover what makes us stand out from the rest</p>
+            </div>
             <div class="row">
                 <div class="col-md-4">
-                    <div class="feature-icon-box">
+                    <div class="feature-icon-box animate__animated animate__fadeInUp">
                         <div class="feature-icon-large">
                             <i class="fas fa-school"></i>
                         </div>
                         <h3>Modern Facilities</h3>
-                        <p>State-of-the-art classrooms, playgrounds, and learning resources designed for optimal education.</p>
+                        <p>State-of-the-art classrooms, playgrounds, and learning resources designed for optimal education and child development.</p>
                         <a href="facilities.html" class="read-more">Read more <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
                 
                 <div class="col-md-4">
-                    <div class="feature-icon-box">
+                    <div class="feature-icon-box animate__animated animate__fadeInUp animate__delay-1s">
                         <div class="feature-icon-large">
                             <i class="fas fa-chalkboard-teacher"></i>
                         </div>
                         <h3>Qualified Teachers</h3>
-                        <p>Our dedicated and experienced staff are committed to your child's academic and personal growth.</p>
+                        <p>Our dedicated and experienced staff are committed to your child's academic and personal growth through personalized attention.</p>
                         <a href="staff.html" class="read-more">Read more <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
                 
                 <div class="col-md-4">
-                    <div class="feature-icon-box">
+                    <div class="feature-icon-box animate__animated animate__fadeInUp animate__delay-2s">
                         <div class="feature-icon-large">
                             <i class="fas fa-book-open"></i>
                         </div>
-                        <h3>Comprehensive Education</h3>
-                        <p>A balanced curriculum that combines academic excellence with moral and spiritual development.</p>
-                        <a href="accademics.html" class="read-more">Read more <i class="fas fa-arrow-right"></i></a>
+                        <h3>Comprehensive Curriculum</h3>
+                        <p>A balanced curriculum that combines academic excellence with moral and spiritual development for holistic growth.</p>
+                        <a href="academics.html" class="read-more">Read more <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -1095,8 +765,8 @@
     <section class="why-choose-section">
         <div class="container">
             <div class="section-title">
-                <h2>Why Choose Train Up A Child Schools</h2>
-                <p class="text-muted">Discover what makes us the preferred choice for parents</p>
+                <h2>Our Key Differentiators</h2>
+                <p class="text-muted">What makes us the preferred choice for discerning parents</p>
             </div>
             
             <div class="row">
@@ -1107,7 +777,8 @@
                         </div>
                         <div class="reason-body">
                             <h3 class="reason-title">Academic Excellence</h3>
-                            <p>Consistently ranked among the top schools in Uganda with outstanding national exam results.</p>
+                            <p>Consistently ranked among the top schools in Uganda with outstanding national exam results and university placements.</p>
+                            <a href="#" class="read-more">Learn more <i class="fas fa-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -1118,8 +789,9 @@
                             <img src="img/moto.webp" alt="Christian Values">
                         </div>
                         <div class="reason-body">
-                            <h3 class="reason-title">Christian Values</h3>
-                            <p>We instill strong moral values while respecting all religious backgrounds of our pupils.</p>
+                            <h3 class="reason-title">Values-Based Education</h3>
+                            <p>We instill strong moral values while respecting all religious backgrounds of our pupils through character education.</p>
+                            <a href="#" class="read-more">Learn more <i class="fas fa-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -1131,7 +803,8 @@
                         </div>
                         <div class="reason-body">
                             <h3 class="reason-title">Holistic Development</h3>
-                            <p>Comprehensive sports, arts, and leadership programs to develop well-rounded individuals.</p>
+                            <p>Comprehensive sports, arts, and leadership programs to develop well-rounded individuals with diverse talents.</p>
+                            <a href="#" class="read-more">Learn more <i class="fas fa-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -1140,100 +813,110 @@
     </section>
     
     <!-- Curriculum Section -->
-<section class="curriculum-section">
-    <div class="container">
-        <div class="section-title">
-            <h2>Our Standard Curriculum</h2>
-            <p class="text-muted">Tailored programs for different age groups</p>
-        </div>
-        
-        <div class="row">
-            <div class="col-lg-6 mb-4">
-                <div class="curriculum-card nursery">
-                    <div class="row g-0">
-                        <div class="col-md-5">
-                            <img src="img/nursery.webp" 
-                                 alt="Nursery Program" 
-                                 class="img-fluid h-100 curriculum-image">
-                        </div>
-                        <div class="col-md-7">
-                            <div class="curriculum-content p-3">
-                                <h3 class="curriculum-title">Nursery Program</h3>
-                                <p>Our nursery program focuses on foundational learning through play and discovery. We emphasize:</p>
-                                <ul>
-                                    <li>Early literacy and numeracy skills</li>
-                                    <li>Social and emotional development</li>
-                                    <li>Creative expression through art and music</li>
-                                    <li>Basic Christian values and character building</li>
-                                    <li>Physical coordination and motor skills</li>
-                                </ul>
-                                <a href="accademics.html" class="btn btn-primary mt-2">Learn More</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <section class="curriculum-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Educational Programs</h2>
+                <p class="text-muted">Tailored learning experiences for every age group</p>
             </div>
             
-            <div class="col-lg-6 mb-4">
-                <div class="curriculum-card primary">
-                    <div class="row g-0">
-                        <div class="col-md-5">
-                            <img src="img/primary.jpg" 
-                                 alt="Primary Program" 
-                                 class="img-fluid h-100 curriculum-image">
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="curriculum-card nursery">
+                        <div class="row g-0">
+                            <div class="col-md-5">
+                                <img src="img/nursery.webp" alt="Nursery Program" class="img-fluid h-100 curriculum-image">
+                            </div>
+                            <div class="col-md-7">
+                                <div class="curriculum-content">
+                                    <h3 class="curriculum-title">Nursery Program</h3>
+                                    <p>Our nursery program focuses on foundational learning through play and discovery. We emphasize:</p>
+                                    <ul>
+                                        <li>Early literacy and numeracy skills development</li>
+                                        <li>Social and emotional intelligence building</li>
+                                        <li>Creative expression through art and music</li>
+                                        <li>Basic Christian values and character education</li>
+                                        <li>Physical coordination and motor skills enhancement</li>
+                                    </ul>
+                                    <a href="nursery-program.html" class="btn btn-primary mt-2">Discover More</a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-7">
-                            <div class="curriculum-content p-3">
-                                <h3 class="curriculum-title">Primary Program</h3>
-                                <p>Our primary program builds on the foundation with a comprehensive curriculum that includes:</p>
-                                <ul>
-                                    <li>Core subjects (English, Math, Science, Social Studies)</li>
-                                    <li>Christian Religious Education</li>
-                                    <li>Physical Education and Sports</li>
-                                    <li>Performing Arts and Creative Arts</li>
-                                    <li>Life skills and leadership training</li>
-                                </ul>
-                                <a href="#" class="btn btn-secondary mt-2">Learn More</a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 mb-4">
+                    <div class="curriculum-card primary">
+                        <div class="row g-0">
+                            <div class="col-md-5">
+                                <img src="img/primary.jpg" alt="Primary Program" class="img-fluid h-100 curriculum-image">
+                            </div>
+                            <div class="col-md-7">
+                                <div class="curriculum-content">
+                                    <h3 class="curriculum-title">Primary Program</h3>
+                                    <p>Our primary program builds on the foundation with a comprehensive curriculum that includes:</p>
+                                    <ul>
+                                        <li>Core academic subjects (English, Math, Science, Social Studies)</li>
+                                        <li>Christian Religious Education and moral instruction</li>
+                                        <li>Physical Education and competitive Sports programs</li>
+                                        <li>Performing Arts and Creative Arts development</li>
+                                        <li>Life skills and leadership training initiatives</li>
+                                    </ul>
+                                    <a href="primary-program.html" class="btn btn-secondary mt-2">Explore Program</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
     
     <!-- Contact Form Section -->
     <section class="contact-form-section">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6 mb-5 mb-lg-0">
-                    <div class="form-container">
-                        <h3 class="form-title">Ask About Train Up A Child</h3>
+                    <div class="form-container animate__animated animate__fadeInLeft">
+                        <h3 class="form-title">Request More Information</h3>
                         <form>
                             <div class="mb-3">
-                                <label for="name" class="form-label">Your Name</label>
+                                <label for="name" class="form-label">Your Name *</label>
                                 <input type="text" class="form-control" id="name" required>
                             </div>
                             <div class="mb-3">
-                                <label for="phone" class="form-label">Phone Number</label>
+                                <label for="phone" class="form-label">Phone Number *</label>
                                 <input type="tel" class="form-control" id="phone" required>
                             </div>
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email Address</label>
-                                <input type="email" class="form-control" id="email" required>
+                                <input type="email" class="form-control" id="email">
                             </div>
                             <div class="mb-3">
-                                <label for="requirements" class="form-label">Requirements</label>
-                                <textarea class="form-control" id="requirements" rows="3"></textarea>
+                                <label for="child-grade" class="form-label">Child's Grade Level</label>
+                                <select class="form-select" id="child-grade">
+                                    <option value="">Select Grade</option>
+                                    <option value="nursery">Nursery</option>
+                                    <option value="p1">Primary 1</option>
+                                    <option value="p2">Primary 2</option>
+                                    <option value="p3">Primary 3</option>
+                                    <option value="p4">Primary 4</option>
+                                    <option value="p5">Primary 5</option>
+                                    <option value="p6">Primary 6</option>
+                                    <option value="p7">Primary 7</option>
+                                </select>
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit Inquiry</button>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Your Questions</label>
+                                <textarea class="form-control" id="message" rows="3"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Submit Inquiry</button>
                         </form>
                     </div>
                 </div>
                 
                 <div class="col-lg-6">
-                    <div class="gallery-grid">
+                    <div class="gallery-grid animate__animated animate__fadeInRight">
                         <div class="gallery-item">
                             <img src="img/form1.webp" alt="School Activity" class="gallery-img">
                         </div>
@@ -1276,9 +959,10 @@
                     <div class="director-message h-100">
                         <h3 class="director-name">Message From The Director</h3>
                         <p>Welcome to Train Up A Child Nursery and Primary School, Najjanankumbi Campus. For over 30 years, we have been committed to providing quality education that combines academic excellence with strong Christian values.</p>
-                        <p>Our motto "In God We Trust" reflects our belief that true education must address the mind, body, and spirit. We take pride in our holistic approach that nurtures each child's unique gifts while instilling discipline, moral values, and a love for learning.</p>
-                        <p>At Train Up A Child, we don't just teach children - we raise future leaders who will make a positive difference in our community and nation. I invite you to visit our campus and see firsthand the transformative education we offer.</p>
-                        <p class="mb-0"><strong>Bishop Peter Mutebi</strong><br>School Director</p>
+                        <p>Our motto <strong>"In God We Trust"</strong> reflects our belief that true education must address the mind, body, and spirit. We take pride in our holistic approach that nurtures each child's unique gifts while instilling discipline, moral values, and a lifelong love for learning.</p>
+                        <p>At Train Up A Child, we don't just teach children - we raise future leaders who will make a positive difference in our community and nation. Our graduates stand out not just for their academic achievements, but for their character, integrity, and ability to contribute meaningfully to society.</p>
+                        <p>I invite you to visit our campus and see firsthand the transformative education we offer. Our doors are always open to parents who share our vision for raising well-rounded, God-fearing children.</p>
+                        <p class="mb-0"><strong>Bishop Peter Mutebi</strong><br>Founder & Director</p>
                     </div>
                 </div>
             </div>
@@ -1292,12 +976,19 @@
                 <div class="col-lg-5 mb-5 mb-lg-0">
                     <div class="testimonial-main">
                         <h2>Parent Testimonials</h2>
-                        <p class="text-muted">Hear what parents say about our school</p>
+                        <p class="text-muted">Hear what our parents say about their experience</p>
                         
                         <div id="currentTestimonial">
-                            <img src="img/testimonial1.jpg" alt="Parent" class="testimonial-img">
-                            <p class="testimonial-text">"Train Up A Child has been transformative for my daughter. The academic standards are high, but what impresses me most is how they've nurtured her character and confidence."</p>
+                            <img src="img/testimonial1.jpg" alt="Parent" class="testimonial-img rounded-circle">
+                            <p class="testimonial-text">"Train Up A Child has been transformative for my daughter. The academic standards are high, but what impresses me most is how they've nurtured her character and confidence. She's developed leadership skills I didn't know she had."</p>
                             <p class="testimonial-author">- Mrs. Nakato, Parent of P5 Student</p>
+                            <div class="rating mb-3">
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1305,22 +996,22 @@
                 <div class="col-lg-7">
                     <div class="parent-gallery">
                         <div class="parent-thumb active">
-                            <img src="img/testimonial1.jpg" alt="Parent 1">
+                            <img src="img/testimonial1.jpg" alt="Parent 1" class="rounded">
                         </div>
                         <div class="parent-thumb">
-                            <img src="img/testimonial2.jpg" alt="Parent 2">
+                            <img src="img/testimonial2.jpg" alt="Parent 2" class="rounded">
                         </div>
                         <div class="parent-thumb">
-                            <img src="img/testimonial3.jpg" alt="Parent 3">
+                            <img src="img/testimonial3.jpg" alt="Parent 3" class="rounded">
                         </div>
                         <div class="parent-thumb">
-                            <img src="img/testimonial4.jpg" alt="Parent 4">
+                            <img src="img/testimonial4.jpg" alt="Parent 4" class="rounded">
                         </div>
                         <div class="parent-thumb">
-                            <img src="img/testimonial2.jpg" alt="Parent 5">
+                            <img src="img/testimonial5.jpg" alt="Parent 5" class="rounded">
                         </div>
                         <div class="parent-thumb">
-                            <img src="img/testimonial4.jpg" alt="Parent 6">
+                            <img src="img/testimonial6.jpg" alt="Parent 6" class="rounded">
                         </div>
                     </div>
                 </div>
@@ -1337,7 +1028,7 @@
                         <i class="fas fa-users"></i>
                     </div>
                     <div class="stat-number">1,200+</div>
-                    <h3>Students</h3>
+                    <h3>Happy Students</h3>
                 </div>
                 
                 <div class="col-md-4 mb-5 mb-md-0">
@@ -1350,10 +1041,10 @@
                 
                 <div class="col-md-4">
                     <div class="stat-icon">
-                        <i class="fas fa-calendar-alt"></i>
+                        <i class="fas fa-award"></i>
                     </div>
                     <div class="stat-number">30+</div>
-                    <h3>Years Active</h3>
+                    <h3>Years of Excellence</h3>
                 </div>
             </div>
         </div>
@@ -1363,54 +1054,63 @@
     <section class="news-section">
         <div class="container">
             <div class="section-title">
-                <h2>Recent Stories & Events</h2>
-                <p class="text-muted">Stay updated with our school activities</p>
+                <h2>Latest News & Events</h2>
+                <p class="text-muted">Stay updated with our school community</p>
             </div>
             
             <div class="row">
                 <div class="col-lg-6">
                     <div class="main-news">
-                        <img src="img/sportsday.jpg" alt="Main News" class="main-news-img">
-                        <h3><a href="sportsday.html">Annual Sports Day 2025</a></h3>
-                        <p class="news-date">June 15, 2025</p>
-                        <p>Our students showcased their athletic talents in our colorful annual sports day event, with parents and teachers cheering them on.</p>
+                        <img src="img/sportsday.jpg" alt="Annual Sports Day" class="main-news-img rounded">
+                        <div class="badge bg-primary mb-2">Event</div>
+                        <h3><a href="sportsday.html" class="text-decoration-none">Annual Sports Day 2025</a></h3>
+                        <p class="news-date text-muted"><i class="far fa-calendar-alt me-2"></i>June 15, 2025</p>
+                        <p>Our students showcased their athletic talents in our colorful annual sports day event, with parents and teachers cheering them on in various competitions including track, football, and traditional games.</p>
                         <a href="sportsday.html" class="read-more">Read full story <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
                 
                 <div class="col-lg-6">
                     <div class="news-item">
-                        <img src="img/fruitday.webp" alt="News 1" class="news-thumb">
+                        <img src="img/fruitday.webp" alt="Fruit Friday" class="news-thumb rounded">
                         <div>
-                            <h4><a href="fruitday.html">Fruit Friday 2025</a></h4>
-                            <p class="news-date">May 28, 2025</p>
+                            <div class="badge bg-success mb-1">Health</div>
+                            <h4><a href="fruitday.html" class="text-decoration-none">Annual Fruit Friday Celebration</a></h4>
+                            <p class="news-date text-muted"><small><i class="far fa-calendar-alt me-1"></i>May 28, 2025</small></p>
                         </div>
                     </div>
                     
                     <div class="news-item">
-                        <img src="img/p7prom.jpg" alt="News 2" class="news-thumb">
+                        <img src="img/p7prom.jpg" alt="P7 Prom" class="news-thumb rounded">
                         <div>
-                            <h4><a href="#"> P7 Prom Party </a></h4>
-                            <p class="news-date">April 15, 2025</p>
+                            <div class="badge bg-purple mb-1">Graduation</div>
+                            <h4><a href="#" class="text-decoration-none">P7 Prom Party 2025</a></h4>
+                            <p class="news-date text-muted"><small><i class="far fa-calendar-alt me-1"></i>April 15, 2025</small></p>
                         </div>
                     </div>
                     
                     <div class="news-item">
-                        <img src="img/tour.jpg" alt="News 3" class="news-thumb">
+                        <img src="img/tour.jpg" alt="Educational Tour" class="news-thumb rounded">
                         <div>
-                            <h4><a href="#"> Tour</a></h4>
-                            <p class="news-date">March 22, 2025</p>
+                            <div class="badge bg-orange mb-1">Field Trip</div>
+                            <h4><a href="#" class="text-decoration-none">Educational Tour to National Museum</a></h4>
+                            <p class="news-date text-muted"><small><i class="far fa-calendar-alt me-1"></i>March 22, 2025</small></p>
                         </div>
                     </div>
                     
                     <div class="news-item">
-                        <img src="img/pta.jpg" alt="News 4" class="news-thumb">
+                        <img src="img/pta.jpg" alt="PTA Meeting" class="news-thumb rounded">
                         <div>
-                            <h4><a href="#">Parent-Teacher Conference</a></h4>
-                            <p class="news-date">February 10, 2025</p>
+                            <div class="badge bg-primary mb-1">Meeting</div>
+                            <h4><a href="#" class="text-decoration-none">Parent-Teacher Conference</a></h4>
+                            <p class="news-date text-muted"><small><i class="far fa-calendar-alt me-1"></i>February 10, 2025</small></p>
                         </div>
                     </div>
                 </div>
+            </div>
+            
+            <div class="text-center mt-4">
+                <a href="events.html" class="btn btn-outline-primary">View All News & Events</a>
             </div>
         </div>
     </section>
@@ -1420,14 +1120,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 mb-5 mb-lg-0">
-                    <a href="#" class="footer-logo">
-                        <img src="img/logo.jpeg" alt="School Logo">
-                    </a>
-                    <p>Train Up A Child Nursery and Primary School (Najjanankumbi Campus) is more than an institution; it's a community dedicated to nurturing the leaders of tomorrow.</p>
+                    <div class="mb-4">
+                        <img src="img/logo-light.png" alt="School Logo" height="50">
+                    </div>
+                    <p>Train Up A Child Nursery and Primary School (Najjanankumbi Campus) is more than an institution; it's a community dedicated to nurturing the leaders of tomorrow through quality education and moral foundation.</p>
                     <div class="social-icons mt-4">
-                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white me-2"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white me-2"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white me-2"><i class="fab fa-instagram"></i></a>
                         <a href="#" class="text-white"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
@@ -1436,25 +1136,27 @@
                     <div class="footer-links">
                         <h4>Quick Links</h4>
                         <ul>
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Academics</a></li>
-                            <li><a href="#">Admissions</a></li>
-                            <li><a href="#">Gallery</a></li>
-                            <li><a href="#">Contact</a></li>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="academics.html">Academics</a></li>
+                            <li><a href="admissions.html">Admissions</a></li>
+                            <li><a href="events.html">Events</a></li>
+                            <li><a href="gallery.html">Gallery</a></li>
+                            <li><a href="contact.html">Contact</a></li>
                         </ul>
                     </div>
                 </div>
                 
                 <div class="col-lg-3 col-md-4 mb-5 mb-md-0">
                     <div class="footer-links">
-                        <h4>Programs</h4>
+                        <h4>Our Programs</h4>
                         <ul>
-                            <li><a href="#">Nursery</a></li>
-                            <li><a href="#">Primary</a></li>
-                            <li><a href="#">After School</a></li>
-                            <li><a href="#">Holiday Programs</a></li>
-                            <li><a href="#">Sports Academy</a></li>
+                            <li><a href="nursery-program.html">Nursery School</a></li>
+                            <li><a href="primary-program.html">Primary School</a></li>
+                            <li><a href="after-school.html">After School Care</a></li>
+                            <li><a href="holiday-programs.html">Holiday Programs</a></li>
+                            <li><a href="sports-academy.html">Sports Academy</a></li>
+                            <li><a href="music-program.html">Music & Arts</a></li>
                         </ul>
                     </div>
                 </div>
@@ -1462,10 +1164,11 @@
                 <div class="col-lg-3 col-md-4">
                     <div class="footer-contact">
                         <h4>Contact Us</h4>
-                        <p><i class="fas fa-map-marker-alt"></i> Luthuli Drive, Najjanankumbi, Kampala, Uganda</p>
-                        <p><i class="fas fa-phone-alt"></i> +256 772 413188</p>
-                        <p><i class="fas fa-envelope"></i> info@trainupachild.com</p>
-                        <p><i class="fas fa-clock"></i> Mon-Fri: 7:30 AM - 5:00 PM</p>
+                        <p><i class="fas fa-map-marker-alt me-2"></i> Luthuli Drive, Najjanankumbi, Kampala, Uganda</p>
+                        <p><i class="fas fa-phone-alt me-2"></i> +256 772 413188</p>
+                        <p><i class="fas fa-envelope me-2"></i> info@trainupachild.com</p>
+                        <p><i class="fas fa-clock me-2"></i> Mon-Fri: 7:30 AM - 5:00 PM</p>
+                        <p><i class="fas fa-calendar-alt me-2"></i> Saturday: 9:00 AM - 1:00 PM</p>
                     </div>
                 </div>
             </div>
@@ -1476,8 +1179,8 @@
                         <p>&copy; 2025 Train Up A Child Nursery and Primary School. All Rights Reserved.</p>
                     </div>
                     <div class="col-md-6 text-md-end">
-                        <a href="#" class="text-white me-3">Privacy Policy</a>
-                        <a href="#" class="text-white">Terms of Service</a>
+                        <a href="privacy-policy.html" class="text-white me-3">Privacy Policy</a>
+                        <a href="terms.html" class="text-white">Terms of Service</a>
                     </div>
                 </div>
             </div>
@@ -1503,37 +1206,43 @@
         const parentThumbs = document.querySelectorAll('.parent-thumb');
         const currentTestimonial = document.getElementById('currentTestimonial');
         
-        // Sample testimonial data (in a real site, this would come from a database)
+        // Testimonial data
         const testimonials = [
             {
                 img: 'img/testimonial1.jpg',
-                text: '"Train Up A Child has been transformative for my daughter. The academic standards are high, but what impresses me most is how they\'ve nurtured her character and confidence."',
-                author: '- Mr. Kato, Parent of P5 Student'
+                text: '"Train Up A Child has been transformative for my daughter. The academic standards are high, but what impresses me most is how they\'ve nurtured her character and confidence. She\'s developed leadership skills I didn\'t know she had."',
+                author: '- Mrs. Nakato, Parent of P5 Student',
+                rating: 5
             },
             {
                 img: 'img/testimonial2.jpg',
-                text: '"The discipline and Christian values instilled in my son are remarkable. His academic performance has improved tremendously since joining Train Up A Child."',
-                author: '- Mrs. Ssebaggala, Parent of P3 Student'
+                text: '"The discipline and Christian values instilled in my son are remarkable. His academic performance has improved tremendously since joining Train Up A Child, and his behavior at home has never been better."',
+                author: '- Mrs. Ssebaggala, Parent of P3 Student',
+                rating: 5
             },
             {
-                img: 'img/testimonial3',
-                text: '"As a working parent, I appreciate the school\'s communication and involvement of parents. The teachers truly care about each child\'s development."',
-                author: '- Mrs. Nalwoga, Parent of Nursery Student'
+                img: 'img/testimonial3.jpg',
+                text: '"As a working parent, I appreciate the school\'s communication and involvement of parents. The teachers truly care about each child\'s development and keep us informed every step of the way."',
+                author: '- Mrs. Nalwoga, Parent of Nursery Student',
+                rating: 4
             },
             {
-                img: 'img/testimonial4',
-                text: '"The extracurricular activities have helped my daughter discover her talent in music. The balanced approach to education is exactly what we wanted."',
-                author: '- Mr. Kato, Parent of P6 Student'
+                img: 'img/testimonial4.jpg',
+                text: '"The extracurricular activities have helped my daughter discover her talent in music. The balanced approach to education is exactly what we wanted for our child\'s development."',
+                author: '- Mr. Kato, Parent of P6 Student',
+                rating: 5
             },
             {
-                img: 'img/testimonial5',
-                text: '"I\'ve seen my son grow in confidence and leadership skills. The school environment encourages children to express themselves while maintaining discipline."',
-                author: '- Mr. Katumba, Parent of P2 Student'
+                img: 'img/testimonial5.jpg',
+                text: '"I\'ve seen my son grow in confidence and leadership skills. The school environment encourages children to express themselves while maintaining excellent discipline and respect."',
+                author: '- Mr. Katumba, Parent of P2 Student',
+                rating: 5
             },
             {
-                img: 'img/testimonial3',
-                text: '"After transferring from another school, my child is now excited to go to school every day. The teachers make learning engaging and fun."',
-                author: '- Mr. Mugisha, Parent of P4 Student'
+                img: 'img/testimonial6.jpg',
+                text: '"After transferring from another school, my child is now excited to go to school every day. The teachers make learning engaging and fun while maintaining high standards."',
+                author: '- Mr. Mugisha, Parent of P4 Student',
+                rating: 4
             }
         ];
         
@@ -1545,43 +1254,41 @@
                 // Add active class to clicked thumb
                 this.classList.add('active');
                 
+                // Generate star rating
+                let stars = '';
+                for (let i = 0; i < testimonials[index].rating; i++) {
+                    stars += '<i class="fas fa-star text-warning"></i>';
+                }
+                
                 // Update testimonial content
                 currentTestimonial.innerHTML = `
-                    <img src="${testimonials[index].img}" alt="Parent" class="testimonial-img">
+                    <img src="${testimonials[index].img}" alt="Parent" class="testimonial-img rounded-circle">
                     <p class="testimonial-text">${testimonials[index].text}</p>
                     <p class="testimonial-author">${testimonials[index].author}</p>
+                    <div class="rating mb-3">${stars}</div>
                 `;
             });
         });
         
-        // Reset animations when slide changes
-        document.getElementById('heroCarousel').addEventListener('slide.bs.carousel', function () {
-            const activeItem = this.querySelector('.active');
-            const title = activeItem.querySelector('.hero-title');
-            const subtitle = activeItem.querySelector('.hero-subtitle');
-            const buttons = activeItem.querySelector('.hero-buttons');
+        // Initialize first testimonial
+        parentThumbs[0].click();
+        
+        // Animate elements when they come into view
+        const animateOnScroll = function() {
+            const elements = document.querySelectorAll('.feature-icon-box, .form-container, .gallery-grid');
             
-            // Reset animations
-            title.style.opacity = '0';
-            title.style.transform = 'translateY(30px)';
-            subtitle.style.opacity = '0';
-            subtitle.style.transform = 'translateY(30px)';
-            buttons.style.opacity = '0';
-            buttons.style.transform = 'translateY(30px)';
-            
-            // Trigger reflow to restart animations
-            void title.offsetWidth;
-            void subtitle.offsetWidth;
-            void buttons.offsetWidth;
-            
-            // Apply animated state
-            title.style.opacity = '1';
-            title.style.transform = 'translateY(0)';
-            subtitle.style.opacity = '1';
-            subtitle.style.transform = 'translateY(0)';
-            buttons.style.opacity = '1';
-            buttons.style.transform = 'translateY(0)';
-        });
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementPosition < windowHeight - 100) {
+                    element.classList.add('animate__animated', 'animate__fadeInUp');
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
     </script>
 </body>
 </html>
