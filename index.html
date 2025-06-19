@@ -820,6 +820,87 @@
         }
     }
 
+        /* Mobile menu fixes - Improved version */
+    @media (max-width: 991.98px) {
+        #navbarNav {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 80%;
+            max-width: 300px;
+            height: 100vh;
+            background: white;
+            z-index: 1050;
+            padding: 60px 20px 20px;
+            overflow-y: auto;
+            transform: translateX(100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+        }
+        #navbarNav.show {
+            transform: translateX(0);
+        }
+        
+        .navbar-toggler {
+            position: relative;
+            z-index: 1051;
+            border: none;
+            background: transparent;
+        }
+        
+        .btn-close-menu {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 1052;
+        }
+        .main-menu {
+            flex-direction: column;
+            height: 100%;
+            justify-content: flex-start;
+            padding-top: 20px;
+        }
+        
+        .nav-item {
+            margin: 10px 0;
+            width: 100%;
+        }
+        
+        .nav-link {
+            padding: 12px 0 !important;
+            display: block;
+            text-align: center;
+        }
+
+        .btn-secondary {
+            width: 100%;
+            text-align: center;
+            margin-top: 20px !important;
+        }
+        
+        /* Overlay when menu is open */
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1049;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .menu-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
     
     </style>
 </head>
@@ -1561,5 +1642,36 @@
         navbar.classList.toggle('show');
     });
     </script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const toggleBtn = document.getElementById('mobileMenuToggle');
+        const closeBtn = document.getElementById('closeMobileMenu');
+        const navbar = document.getElementById('navbarNav');
+        const overlay = document.createElement('div');
+        overlay.className = 'menu-overlay';
+        document.body.appendChild(overlay);
+        
+        // Toggle menu function
+        function toggleMenu() {
+            navbar.classList.toggle('show');
+            overlay.classList.toggle('show');
+            document.body.style.overflow = navbar.classList.contains('show') ? 'hidden' : '';
+        }
+        
+        // Click events
+        toggleBtn.addEventListener('click', toggleMenu);
+        closeBtn.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+        // Close menu when clicking on links (optional)
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 991.98) {
+                    toggleMenu();
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>
